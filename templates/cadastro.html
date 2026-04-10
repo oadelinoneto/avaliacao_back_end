@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/cadastro" method="POST">
+
+        <label for="pergunta">Pergunta:</label><br>
+        <input type="text" id="pergunta" name="pergunta"><br>
+
+        <label for="alternativaA">Alternativa A:</label><br>
+        <input type="text" name="alternativaA" id="alternativaA"><br>
+
+        <label for="alternativaB">Alternativa B:</label><br>
+        <input type="text" name="alternativaB" id="alternativaB"><br>
+
+        <label for="alternativaC">Alternativa C:</label><br>
+        <input type="text" name="alternativaC" id="alternativaC"><br>
+
+        <label for="respostaCorreta">Resposta correta:</label><br>
+        <select name="respostaCorreta" id="respostaCorreta">
+            <option value="alternativaA">Alternativa A</option>
+            <option value="alternativaB">Alternativa B</option>
+            <option value="alternativaC">Alternativa C</option>
+        </select>
+        <br><br>
+
+        <input type="submit" value="Cadastrar">
+
+    </form>
+
+    <br><br>
+    <a href='/'>Retornar ao inicio</a>
+</body>
+</html>

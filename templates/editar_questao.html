@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Questão a ser editada : </h1>
+        <div>
+            <h3>Pergunta : {{ pergunta.pergunta }}</h3>
+            <ul>
+                <li>Alternativa A: {{ pergunta.alternativaA }}</li>
+                <li>Alternativa B: {{ pergunta.alternativaB }}</li>
+                <li>Alternativa C: {{ pergunta.alternativaC }}</li>
+            </ul>
+            <p>Resposta correta: {{ pergunta.respostaCorreta }}</p>
+        </div>
+
+
+    <h1>Formulário de edição</h1>
+    <form action="/editar_questao" method="POST">
+
+        <input type="hidden" name="id" value="{{ pergunta.id }}">
+        <label for="pergunta">Pergunta:</label><br>
+        <input type="text" id="pergunta" name="pergunta"><br>
+
+        <label for="alternativaA">Alternativa A:</label><br>
+        <input type="text" name="alternativaA" id="alternativaA"><br>
+
+        <label for="alternativaB">Alternativa B:</label><br>
+        <input type="text" name="alternativaB" id="alternativaB"><br>
+
+        <label for="alternativaC">Alternativa C:</label><br>
+        <input type="text" name="alternativaC" id="alternativaC"><br>
+
+        <label for="respostaCorreta">Resposta correta:</label><br>
+        <select name="respostaCorreta" id="respostaCorreta">
+            <option value="alternativaA">Alternativa A</option>
+            <option value="alternativaB">Alternativa B</option>
+            <option value="alternativaC">Alternativa C</option>
+        </select>
+        <br><br>
+
+        <input type="submit" value="Cadastrar">
+        
+        <br><br>
+        <a href='/'>Retornar ao inicio</a>
+
+</body>
+</html>
