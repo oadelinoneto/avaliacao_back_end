@@ -1,7 +1,7 @@
 from flask import Flask
-from routes import index_router, cadastro_router, lista_router
+from routes import index_router, questao_router, jogo_router
 
 app = Flask(__name__)
 index_router.adicionar_index(app)
-cadastro_router.adicionar_rotas_cadastro(app)
-lista_router.adicionar_rotas_lista(app)
+questao_router.adicionar_rotas_questao(app)
+jogo_router.adicionar_jogo(app)

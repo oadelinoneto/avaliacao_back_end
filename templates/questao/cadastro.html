@@ -6,22 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Questão a ser editada : </h1>
-        <div>
-            <h3>Pergunta : {{ pergunta.pergunta }}</h3>
-            <ul>
-                <li>Alternativa A: {{ pergunta.alternativaA }}</li>
-                <li>Alternativa B: {{ pergunta.alternativaB }}</li>
-                <li>Alternativa C: {{ pergunta.alternativaC }}</li>
-            </ul>
-            <p>Resposta correta: {{ pergunta.respostaCorreta }}</p>
-        </div>
+    <form action="/questao/cadastro" method="POST">
 
-
-    <h1>Formulário de edição</h1>
-    <form action="/editar_questao" method="POST">
-
-        <input type="hidden" name="id" value="{{ pergunta.id }}">
         <label for="pergunta">Pergunta:</label><br>
         <input type="text" id="pergunta" name="pergunta"><br>
 
@@ -36,16 +22,17 @@
 
         <label for="respostaCorreta">Resposta correta:</label><br>
         <select name="respostaCorreta" id="respostaCorreta">
-            <option value="alternativaA">Alternativa A</option>
-            <option value="alternativaB">Alternativa B</option>
-            <option value="alternativaC">Alternativa C</option>
+            <option value="A">Alternativa A</option>
+            <option value="B">Alternativa B</option>
+            <option value="C">Alternativa C</option>
         </select>
         <br><br>
 
         <input type="submit" value="Cadastrar">
-        
-        <br><br>
-        <a href='/'>Retornar ao inicio</a>
 
+    </form>
+
+    <br><br>
+    <a href='/'>Retornar ao inicio</a>
 </body>
 </html>

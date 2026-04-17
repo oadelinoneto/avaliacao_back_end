@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo - Tela Inicial</title>
+    <style>
+        .layout { display: flex; gap: 20px; }
+        .painel-principal { flex: 1; border: 1px solid; min-height: 300px; }
+        .painel-jogador { width: 260px; border: 1px solid; min-height: 300px; }
+    </style>
+</head>
+<body>
+    <h1>Tela inicial</h1>
+    <div class="layout">
+        <div class="painel-principal">
+            <h2>Painel Principal</h2>
+            {% if questao %}
+                <p>Pergunta: {{ questao.pergunta }}</p>
+
+                <form action="/jogo/responder" method="post">
+                    <input type="hidden" name="id_questao" value="{{ questao.id }}">
+                    <p>
+                        <input type="radio" id="alternativaA" name="resposta" value="A" required>
+                        <label for="alternativaA">A: {{ questao.alternativaA }}</label>
+                    </p>
+                    <p>
+                        <input type="radio" id="alternativaB" name="resposta" value="B">
+                        <label for="alternativaB">B: {{ questao.alternativaB }}</label>
+                    </p>
+                    <p>
+                        <input type="radio" id="alternativaC" name="resposta" value="C">
+                        <label for="alternativaC">C: {{ questao.alternativaC }}</label>
+                    </p>
+                    <button type="submit">Enviar Resposta</button>
+                </form>
+            {% else %}
+                <p>Nenhuma questão cadastrada.</p>
+            {% endif %}
+
+        </div>
+
+        
+        <div class="painel-jogador">
+            <h2>Painel do Jogador</h2>
+            <p>Perguntas: {{ jogo.perguntas }}</p>
+            <p>Acertos: {{ jogo.acertos }}</p>
+            <p>Erros: {{ jogo.erros }}</p>
+
+
+        </div>
+    </div>
+</body>
+</html>

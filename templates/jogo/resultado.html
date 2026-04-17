@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado</title>
+    <style>
+        .layout { display: flex; gap: 20px; }
+        .painel-principal { flex: 1; border: 1px solid; min-height: 300px; }
+        .painel-jogador { width: 260px; border: 1px solid; min-height: 300px; }
+        .alternativa { padding: 6px; border: 1px solid #ccc; margin: 6px 0; }
+        .acerto { background: #66ff66; }
+        .erro { background: #ff7070; }
+        .correta { background: #fff166; }
+    </style>
+</head>
+<body>
+    <h1>Resultado da Pergunta</h1>
+    <div class="layout">
+        <div class="painel-principal">
+            <h2>Painel Principal</h2>
+            {% if questao %}
+                <p>Pergunta: {{ questao.pergunta }}</p>
+
+                {% set classe_a = '' %}
+                {% set classe_b = '' %}
+                {% set classe_c = '' %}
+
+                {% if acertou %}
+                    {% if resposta_jogador == 'A' %}{% set classe_a = 'acerto' %}{% endif %}
+                    {% if resposta_jogador == 'B' %}{% set classe_b = 'acerto' %}{% endif %}
+                    {% if resposta_jogador == 'C' %}{% set classe_c = 'acerto' %}{% endif %}
+                {% else %}
+                    {% if resposta_jogador == 'A' %}{% set classe_a = 'erro' %}{% endif %}
+                    {% if resposta_jogador == 'B' %}{% set classe_b = 'erro' %}{% endif %}
+                    {% if resposta_jogador == 'C' %}{% set classe_c = 'erro' %}{% endif %}
+
+                    {% if questao.respostaCorreta == 'A' %}{% set classe_a = 'correta' %}{% endif %}
+                    {% if questao.respostaCorreta == 'B' %}{% set classe_b = 'correta' %}{% endif %}
+                    {% if questao.respostaCorreta == 'C' %}{% set classe_c = 'correta' %}{% endif %}
+                {% endif %}
+
+                <p class="alternativa {{ classe_a }}">A: {{ questao.alternativaA }}</p>
+                <p class="alternativa {{ classe_b }}">B: {{ questao.alternativaB }}</p>
+                <p class="alternativa {{ classe_c }}">C: {{ questao.alternativaC }}</p>
+
+                <form action="/jogo/continuar" method="post">
+                    <button type="submit">Continuar Jogando</button>
+                </form>
+            {% else %}
+                <p>Nenhuma questão cadastrada.</p>
+            {% endif %}
+
+        </div>
+
+        
+        <div class="painel-jogador">
+            <h2>Painel do Jogador</h2>
+            <p>Perguntas: {{ jogo.perguntas }}</p>
+            <p>Acertos: {{ jogo.acertos }}</p>
+            <p>Erros: {{ jogo.erros }}</p>
+
+
+        </div>
+    </div>
+</body>
+</html>

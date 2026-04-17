@@ -12,16 +12,34 @@ class Questao:
         self.alternativaC = alternativaC
         self.respostaCorreta = respostaCorreta
 
-    @classmethod
-    def cadastrarQuestao(cls, pergunta, alternativaA, alternativaB, alternativaC, respostaCorreta):
-        novaQuestao = cls(pergunta, alternativaA, alternativaB, alternativaC, respostaCorreta)
-        listaQuestoes.append(novaQuestao)
-        return novaQuestao
+    def cadastrarQuestao(self):
+        listaQuestoes.append(self)
+        return self
+    
+    def editar_questao(self, pergunta, alternativaA, alternativaB, alternativaC, respostaCorreta):
+        self.pergunta = pergunta
+        self.alternativaA = alternativaA
+        self.alternativaB = alternativaB
+        self.alternativaC = alternativaC
+        self.respostaCorreta = respostaCorreta
+        return self
+    
+    def remover_questao(self):
+        listaQuestoes.remove(self)
+        return True
+    
+    def resposta_correta(self, resposta):
+        if resposta == self.respostaCorreta:
+            return True
+
+        return False
     
     @classmethod
-    def exibirQuestoes(cls):
-        return listaQuestoes
+    def buscar_por_id(cls, id):
+        for questao in listaQuestoes:
+            if str(questao.id) == str(id):
+                return questao
+        return None
 
-Questao.cadastrarQuestao('questao 1', 'oi', 'oi', 'oi', 'oi')
-
-Questao.cadastrarQuestao('questao 2', 'ola', 'ola', 'ola', 'ola')
+questao = Questao("Qual é a capital da França?", "Paris", "Londres", "Berlim", "A")
+questao.cadastrarQuestao()

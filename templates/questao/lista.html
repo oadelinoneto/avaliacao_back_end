@@ -13,11 +13,11 @@
                 <h3>Pergunta : {{ pergunta.pergunta }}</h3>
                 <a href="{{ url_for('editar_questao', id=pergunta.id)}}">Editar</a>
                 <a href="{{ url_for('remover_questao', id=pergunta.id)}}">Remover</a>
-                <ul>
+
                     <li>Alternativa A: {{ pergunta.alternativaA }}</li>
                     <li>Alternativa B: {{ pergunta.alternativaB }}</li>
                     <li>Alternativa C: {{ pergunta.alternativaC }}</li>
-                </ul>
+
                 <p>Resposta correta: {{ pergunta.respostaCorreta }}</p>
             </div>
         {% endfor %}
