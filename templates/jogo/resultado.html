@@ -19,17 +19,17 @@
                 {% set classe_c = '' %}
 
                 {% if acertou %}
-                    {% if resposta_jogador == 'A' %}{% set classe_a = 'acerto' %}{% endif %}
-                    {% if resposta_jogador == 'B' %}{% set classe_b = 'acerto' %}{% endif %}
-                    {% if resposta_jogador == 'C' %}{% set classe_c = 'acerto' %}{% endif %}
+                    {% if questao.respostaCorreta == 'A' %}{% set classe_a = 'acerto' %}{% endif %}
+                    {% if questao.respostaCorreta == 'B' %}{% set classe_b = 'acerto' %}{% endif %}
+                    {% if questao.respostaCorreta == 'C' %}{% set classe_c = 'acerto' %}{% endif %}
                 {% else %}
                     {% if resposta_jogador == 'A' %}{% set classe_a = 'erro' %}{% endif %}
                     {% if resposta_jogador == 'B' %}{% set classe_b = 'erro' %}{% endif %}
                     {% if resposta_jogador == 'C' %}{% set classe_c = 'erro' %}{% endif %}
 
-                    {% if questao.respostaCorreta == 'A' %}{% set classe_a = 'correta' %}{% endif %}
-                    {% if questao.respostaCorreta == 'B' %}{% set classe_b = 'correta' %}{% endif %}
-                    {% if questao.respostaCorreta == 'C' %}{% set classe_c = 'correta' %}{% endif %}
+                    {% if questao.respostaCorreta == 'A' %}{% set classe_a = 'acerto' %}{% endif %}
+                    {% if questao.respostaCorreta == 'B' %}{% set classe_b = 'acerto' %}{% endif %}
+                    {% if questao.respostaCorreta == 'C' %}{% set classe_c = 'acerto' %}{% endif %}
                 {% endif %}
 
                 <p class="alternativa {{ classe_a }}">A: {{ questao.alternativaA }}</p>
