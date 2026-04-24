@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fim de jogo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Fim de jogo</h1>
+    <div class="layout">
+        <div class="painel-principal">
+            <h2>Resumo da partida</h2>
+            <p>Total de perguntas respondidas: {{ jogo.perguntas }}</p>
+            <p>Total de acertos: {{ jogo.acertos }}</p>
+            <p>Total de erros: {{ jogo.erros }}</p>
+
+            <form action="/jogo" method="get">
+                <button type="submit">Jogar Novamente</button>
+            </form>
+        </div>
+
+        <div class="painel-jogador">
+            <h2>Painel do Jogador</h2>
+            <p>Perguntas: {{ jogo.perguntas }}</p>
+            <p>Acertos: {{ jogo.acertos }}</p>
+            <p>Erros: {{ jogo.erros }}</p>
+            <p><a href="/"><strong>Retornar ao inicio</strong></a></p>
+        </div>
+    </div>
+</body>
+</html>

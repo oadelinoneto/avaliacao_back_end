@@ -13,11 +13,33 @@ def sem_questoes():
     return render_template('jogo/sem_questoes.html')
 
 
+def fim_jogo():
+    if 'inicializar_jogo' not in globals():
+        return redirect(url_for('pagina_inicial_jogo'))
+
+    return render_template('jogo/fim_jogo.html', jogo=inicializar_jogo)
+
+
 def continuar_jogo():
     if not listaQuestoes:
         return redirect(url_for('sem_questoes'))
-    
-    questao = random.choice(listaQuestoes)
+
+    questoes_restantes = inicializar_jogo.get('questoes_restantes', [])
+
+    if not questoes_restantes:
+        return redirect(url_for('fim_jogo'))
+
+    id_questao = random.choice(questoes_restantes)
+    questao = Questao.buscar_por_id(id_questao)
+
+    if questao is None:
+        questoes_restantes.remove(id_questao)
+
+        if not questoes_restantes:
+            return redirect(url_for('fim_jogo'))
+
+        return continuar_jogo()
+
     return render_template('jogo/pagina_jogo.html', jogo=inicializar_jogo, questao=questao)
 
 
@@ -25,15 +47,24 @@ def inicio_jogo():
     global inicializar_jogo
     
     inicializar_jogo = {
-    'perguntas': 0,
-    'acertos': 0,
-    'erros': 0
+        'perguntas': 0,
+        'acertos': 0,
+        'erros': 0,
+        'questoes_restantes': []
     }
 
     questoes = listaQuestoes
     
     if questoes:
-        questao = random.choice(questoes)
+        for questao in questoes:
+            inicializar_jogo['questoes_restantes'].append(questao.id)
+
+        id_questao = random.choice(inicializar_jogo['questoes_restantes'])
+        questao = Questao.buscar_por_id(id_questao)
+
+        if questao is None:
+            return redirect(url_for('sem_questoes'))
+
         return render_template('jogo/pagina_jogo.html', jogo=inicializar_jogo, questao=questao)
 
     return redirect(url_for('sem_questoes'))
@@ -45,6 +76,11 @@ def responder_questao():
 
     if not listaQuestoes or questao is None:
         return redirect(url_for('sem_questoes'))
+
+    questoes_restantes = inicializar_jogo.get('questoes_restantes', [])
+
+    if questao.id in questoes_restantes:
+        questoes_restantes.remove(questao.id)
 
     inicializar_jogo['perguntas'] += 1
     
