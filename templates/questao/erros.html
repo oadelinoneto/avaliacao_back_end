@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Jogo de perguntas : </h1>
-
+    <h1>ERROS ENCONTRADOS NA QUESTÃO</h1>
     <ul>
-    <h3><a href="/questao/cadastro">Cadastrar novas questões</a></h3>
-    <h3><a href="/questao/lista">Lista de questões</a></h3>
-    <h3><a href="/inicio">Iniciar jogo</a></h3>
+        <p>Contagem de erros: {{ erros|length }}</p>
+
+        {% for erro in erros %}
+            <li>{{ erro }}</li>
+        {% endfor %}
     </ul>
-    
+
+    <a href='/'><strong>Retornar ao inicio</strong></a>
 </body>
-</html> 
+</html>

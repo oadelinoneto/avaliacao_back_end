@@ -4,11 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo - Tela Inicial</title>
-    <style>
-        .layout { display: flex; gap: 20px; }
-        .painel-principal { flex: 1; border: 1px solid; min-height: 300px; }
-        .painel-jogador { width: 260px; border: 1px solid; min-height: 300px; }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <h1>Tela inicial</h1>
@@ -46,6 +42,7 @@
             <p>Perguntas: {{ jogo.perguntas }}</p>
             <p>Acertos: {{ jogo.acertos }}</p>
             <p>Erros: {{ jogo.erros }}</p>
+            <p><a href="/"><strong>Retornar ao inicio</strong></a></p>
 
 
         </div>

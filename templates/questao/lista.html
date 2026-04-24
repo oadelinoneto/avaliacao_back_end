@@ -4,28 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
     {% if questoes %}
-        {% for pergunta in questoes %}
-            <div>
-                <h3>Pergunta : {{ pergunta.pergunta }}</h3>
-                <a href="{{ url_for('editar_questao', id=pergunta.id)}}">Editar</a>
-                <a href="{{ url_for('remover_questao', id=pergunta.id)}}">Remover</a>
+        <div class="lista-questoes">
+            {% for pergunta in questoes %}
+                <div class="item-pergunta">
+                    <h3>Pergunta : {{ pergunta.pergunta }}</h3>
+                    <a href="{{ url_for('editar_questao', id=pergunta.id)}}"><strong>Editar</strong></a>
+                    <a href="{{ url_for('remover_questao', id=pergunta.id)}}"><strong>Remover</strong></a>
 
-                    <li>Alternativa A: {{ pergunta.alternativaA }}</li>
-                    <li>Alternativa B: {{ pergunta.alternativaB }}</li>
-                    <li>Alternativa C: {{ pergunta.alternativaC }}</li>
+                    <ul>
+                        <li>Alternativa A: {{ pergunta.alternativaA }}</li>
+                        <li>Alternativa B: {{ pergunta.alternativaB }}</li>
+                        <li>Alternativa C: {{ pergunta.alternativaC }}</li>
+                    </ul>
 
-                <p>Resposta correta: {{ pergunta.respostaCorreta }}</p>
-            </div>
-        {% endfor %}
+                    <p>Resposta correta: {{ pergunta.respostaCorreta }}</p>
+                </div>
+            {% endfor %}
+        </div>
     {% else %}
         <p>Nenhuma questão cadastrada.</p>
     {% endif %}
 <br><br>    
-    <a href='/'>Retornar ao inicio</a>
+    <a href='/'><strong>Retornar ao inicio</strong></a>
     
 </body>
 </html>
