@@ -8,9 +8,15 @@ def cadastrar_questao():
     alternativaB = request.form.get('alternativaB')
     alternativaC = request.form.get('alternativaC')
     respostaCorreta = request.form.get('respostaCorreta')
-
     nova_questao = Questao(pergunta, alternativaA, alternativaB, alternativaC, respostaCorreta)
+
+    nova_questao.validar_questao()
+
+    if len(nova_questao.erros) > 0:
+        return render_template('questao/erros.html', erros=nova_questao.erros)
+        
     nova_questao.cadastrarQuestao()
+
     return redirect(url_for('exibir_lista'))
 
 
@@ -27,8 +33,7 @@ def editar_questao():
     id = request.args.get('id')
     questao = Questao.buscar_por_id(id)
     
-    if questao is None:
-        return redirect(url_for('exibir_lista'))
+
     
     if request.method == 'GET':
         return render_template('questao/editar_questao.html', pergunta=questao)
@@ -39,6 +44,11 @@ def editar_questao():
         alternativaB = request.form.get('alternativaB')
         alternativaC = request.form.get('alternativaC')
         respostaCorreta = request.form.get('respostaCorreta')
+        
+        novaQuestao = Questao(pergunta, alternativaA, alternativaB, alternativaC, respostaCorreta)
+        novaQuestao.validar_questao()
+        if len(novaQuestao.erros) > 0:
+            return render_template('questao/erros.html', erros=novaQuestao.erros)
         
         questao.editar_questao(pergunta, alternativaA, alternativaB, alternativaC, respostaCorreta)
         return redirect(url_for('exibir_lista'))

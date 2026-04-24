@@ -11,6 +11,7 @@ class Questao:
         self.alternativaB = alternativaB
         self.alternativaC = alternativaC
         self.respostaCorreta = respostaCorreta
+        self.erros = []
 
     def cadastrarQuestao(self):
         listaQuestoes.append(self)
@@ -24,6 +25,23 @@ class Questao:
         self.respostaCorreta = respostaCorreta
         return self
     
+    def validar_questao(self):
+
+        if not self.pergunta:
+            self.erros.append("Campo pergunta obrigatório.")
+
+        if not self.alternativaA:
+            self.erros.append("Campo alternativa A obrigatório.")
+
+        if not self.alternativaB:
+            self.erros.append("Campo alternativa B obrigatório.")
+
+        if not self.alternativaC:
+            self.erros.append("Campo alternativa C obrigatório.")
+
+        return self.erros     
+        
+
     def remover_questao(self):
         listaQuestoes.remove(self)
         return True
@@ -40,6 +58,3 @@ class Questao:
             if str(questao.id) == str(id):
                 return questao
         return None
-
-questao = Questao("Qual é a capital da França?", "Paris", "Londres", "Berlim", "A")
-questao.cadastrarQuestao()
